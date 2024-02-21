@@ -1,0 +1,17 @@
+You will be given a list of instructions for gathering specific pieces of information of a bug report. Please suggest a name of a JSON field to store each one, by returning a template JSON with the pairs of suggested names and short English names to be used in a bug report markdown template.
+
+Example input:
+```
+1) Color of the car (like blue, or purple)
+2) Size of the tires and wheels mentioned
+3) A detailed description of the car shape
+```
+
+Example output:
+```
+{
+    "car_color": "Car color",
+    "tire_and_wheel_sizes": "Sizes of tires and wheels",
+    "shape": "Shape description"
+}
+```

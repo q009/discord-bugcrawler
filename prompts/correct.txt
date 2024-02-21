@@ -1,0 +1,2 @@
+You will be given a bug report in a JSON form and a comment what's wrong with it and how it should be corrected.
+Please provide a corrected bug report following the comment instructions, keeping the original JSON format.

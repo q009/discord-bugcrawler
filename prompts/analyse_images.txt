@@ -1,0 +1,2 @@
+You will be provided images, along with a short snippet from the chat talking about them. A user has reported an issue and the images are part of the evidence.
+Please describe the images in a way that can be useful for the support team to understand, focusing on the parts relevant to the discussion.

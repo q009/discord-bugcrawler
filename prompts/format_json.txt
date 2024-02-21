@@ -1,0 +1,9 @@
+Please fill out the JSON form according to the bug report, thank you.
+
+```json
+{
+@fields@
+}
+```
+
+Please return empty JSON object if there's no bug report.
