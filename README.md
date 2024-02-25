@@ -2,8 +2,7 @@
 
 ## Description
 This is a simple bot that is used to automate filing of GitHub issues by scraping the Discord chat.
-It uses OpenAI's GPT-4 Turbo to analyze the chat and images to gather the information about the issues and then
-generates a markdown that is then posted on GitHub issues.
+It uses OpenAI's GPT-4 Turbo to analyze the chat and embedded images to gather the information about issues, which in turn are automatically filed on GitHub.
 
 ## Prerequisites
 - OpenAI API account with access to GPT-4 Turbo
