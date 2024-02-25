@@ -55,9 +55,6 @@ async def _purge_states() -> None:
     await asyncio.sleep(60 * 10)
     await _purge_states()
 
-# Start purging states
-_purge_states()
-
 async def _get_state(guild_id: int) -> State:
     global _states
     state = None
