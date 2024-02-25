@@ -40,7 +40,6 @@ _logger.addHandler(log_console_handler)
 
 load_dotenv()
 gpt.init(os.getenv('OPENAI_API_KEY'))
-state.init()
 storage.init(os.getenv('MONGO_URI'))
 
 class MyClient(discord.Client):
@@ -240,6 +239,7 @@ class Confirm(discord.ui.View):
 @client.event
 async def on_ready():
     # await client.tree.sync()
+    state.init()
     _logger.info(f"{client.user} is ready and online!")
 
 def extract_message_link_ids(url) -> tuple[int, int, int]:
