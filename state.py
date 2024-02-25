@@ -90,8 +90,10 @@ async def set_config(guild_id: int, config: Config) -> None:
     state._set_config(config)
     storage.set_config(guild_id, config)
 
-async def init() -> None:
-    asyncio.create_task(_purge_states())
+purge_task = None
+def init() -> None:
+    global purge_task
+    purge_task = asyncio.create_task(_purge_states())
 
 async def set_busy(guild_id: int, busy: bool) -> None:
     state = await _get_state(guild_id)
