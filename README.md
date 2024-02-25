@@ -24,7 +24,7 @@ generates a markdown that is then posted on GitHub issues.
     * ``GITHUB_APP_ID=`` - GitHub App ID
     * ``GITHUB_APP_KEY=`` - Name of your GitHub App private key file that you placed in the ``certs/`` directory
     * ``MONGO_URI=`` - MongoDB connection URI
-3. Run the bot with ``python main.py``
+3. Run the bot with ``python bugbot.py``
 4. Invite the bot to your Discord server
 
 ## Configuration
