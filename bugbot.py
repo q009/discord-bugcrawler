@@ -275,16 +275,18 @@ async def new_report(interaction: discord.Integration, message_link: str, bug_hi
     if not await check_config(interaction, await state.get_config(interaction.guild.id)):
         return
 
-    message = await get_message_from_link(message_link, interaction.guild.id)
-
-    if not message:
-        await interaction.response.send_message(f"Invalid message link!", ephemeral=True)
-        return
-
     followup = interaction.followup
     guild_id = interaction.guild.id
 
-    await interaction.response.send_message(f"Preparing bug report...", ephemeral=True)
+    followup_message = None
+
+    message = await get_message_from_link(message_link, interaction.guild.id)
+
+    if not message:
+        await followup.send(f"Invalid message link!", ephemeral=True)
+        return
+
+    followup_message = await followup.send(f"Preparing bug report...", ephemeral=True)
 
     while await state.get_busy(guild_id):
         await asyncio.sleep(10)
@@ -298,22 +300,16 @@ async def new_report(interaction: discord.Integration, message_link: str, bug_hi
         issue_analysis = await analysis_suite.analyse_issue(combined_history, bug_hint)
 
         if issue_analysis == {}:
-            await followup.send(f"No issues found in the chat log!", ephemeral=True)
+            await followup_message.edit(content=f"No issues found in the chat log!")
             await state.set_busy(guild_id, False)
             return
 
         issue_title, issue_md = analysis_suite.make_markdown(issue_analysis)
 
-        followup_message = None
-
         while True:
             confirm_view = Confirm()
 
-            if not followup_message:
-                followup_message = await followup.send(f"Confirm bug report?\n\n{issue_md}", view=confirm_view,
-                                                    ephemeral=True)
-            else:
-                await followup_message.edit(content=f"Confirm bug report?\n\n{issue_md}", view=confirm_view)
+            await followup_message.edit(content=f"Confirm bug report?\n\n{issue_md}", view=confirm_view)
 
             await confirm_view.wait()
             await followup_message.edit(view=None)
@@ -335,7 +331,7 @@ async def new_report(interaction: discord.Integration, message_link: str, bug_hi
                     await followup.edit(content="Bug report cancelled!", view=None)
                     break
     except Exception as e:
-        followup.send("There was an error filing the bug report, please contact bot admin.", ephemeral=True)
+        await followup.send("There was an error filing the bug report, please contact bot admin.", ephemeral=True)
         _logger.exception(f"Error filing bug report:\n{e}")
 
     await state.set_busy(guild_id, False)
