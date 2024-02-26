@@ -270,7 +270,7 @@ async def setup(interaction: discord.Interaction):
 @app_commands.describe(message_link='Message link to start reading from',
                        bug_hint='Hint with regards to the bug')
 async def new_report(interaction: discord.Integration, message_link: str, bug_hint: Optional[str] = "None"):
-    interaction.response.defer(ephemeral=True, thinking=True)
+    await interaction.response.defer(ephemeral=True, thinking=True)
 
     if not await check_config(interaction, await state.get_config(interaction.guild.id)):
         return
