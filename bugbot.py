@@ -325,7 +325,7 @@ async def new_report(interaction: discord.Integration, message_link: str, bug_hi
                     issue_title, issue_md = analysis_suite.make_markdown(issue_analysis)
                 case "correct":
                     await followup_message.edit(content="Correcting bug report...", view=None)
-                    issue_analysis = await analysis_suite.correct_issue(issue_analysis, confirm_view.comment)
+                    issue_analysis = await analysis_suite.correct_analysis(issue_analysis, confirm_view.comment)
                     issue_title, issue_md = analysis_suite.make_markdown(issue_analysis)
                 case "cancel":
                     await followup.edit(content="Bug report cancelled!", view=None)
