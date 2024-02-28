@@ -328,7 +328,7 @@ async def new_report(interaction: discord.Integration, message_link: str, bug_hi
                     issue_analysis = await analysis_suite.correct_analysis(issue_analysis, confirm_view.comment)
                     issue_title, issue_md = analysis_suite.make_markdown(issue_analysis)
                 case "cancel":
-                    await followup.edit(content="Bug report cancelled!", view=None)
+                    await followup_message.edit(content="Bug report cancelled!", view=None)
                     break
     except Exception as e:
         await followup.send("There was an error filing the bug report, please contact bot admin.", ephemeral=True)
