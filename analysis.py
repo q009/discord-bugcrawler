@@ -127,7 +127,7 @@ class AnalysisSuite:
 
         return await loop.run_in_executor(None, gpt.request_json, self._prompt_format_json, analysis)
 
-    async def correct_analysis(analysis: dict, comment: str) -> dict:
+    async def correct_analysis(self, analysis: dict, comment: str) -> dict:
         correct_input = "```json\n"
         correct_input += json.dumps(analysis, indent=4, ensure_ascii=False)
         correct_input += "```\n\nComment: " + comment
